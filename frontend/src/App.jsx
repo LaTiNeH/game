@@ -207,11 +207,11 @@ const VirtualPetGame = () => {
   );
 
   const HomeView = () => (
-    <div className="flex flex-col flex-1 overflow-hidden relative">
+    <div className="relative flex flex-col h-full overflow-hidden">
        <img
           src={petGif}
           alt="寵物"
-          className="w-[192px] h-[192px] object-contain absolute z-10 pointer-events-none"
+          className="absolute bottom-4 right-4 w-[192px] h-[192px] object-contain z-10 pointer-events-none"
           style={{ right: '1rem', bottom: '6rem' }}  
           />
       {/* 上半部：寵物顯示區域 + 狀態條 */}
@@ -242,7 +242,7 @@ const VirtualPetGame = () => {
         </div>
       </div>
   
-      {/* 下半部：操作按鈕固定在底部上方 */}
+      {/*操作按鈕 下半部：操作按鈕固定在底部上方 */}
       <div className="mt-auto px-4 pb-2">
         <div className="w-full flex justify-between items-center gap-x-2">
           <ActionButton onClick={feedPet} disabled={inventory.food === 0} color="bg-orange-500">
@@ -370,7 +370,7 @@ const VirtualPetGame = () => {
     <div className="w-screen h-screen flex items-center justify-center bg-gray-200 overflow-hidden">
       {/* 📱 手機框 */}
       <div
-  className="w-[484px] h-[726px] rounded-[2rem] overflow-hidden shadow-xl
+  className="w-[434px] h-[651px] rounded-[2rem] overflow-hidden shadow-xl
              ring-4 ring-indigo-300/60 bg-white/10 backdrop-blur-md flex flex-col"
   style={{
     // 只在首頁顯示背景，其餘 view 傳 'none'
@@ -388,27 +388,34 @@ const VirtualPetGame = () => {
           </div>
         )}
   
-        {/* 頂部欄 */}
-        <div className="bg-white/80 p-4 shadow-sm">
-          <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold text-gray-800">虛擬寵物</h1>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center">
-                <Coins className="w-4 h-4 text-yellow-500 mr-1" />
-                <span className="font-medium">{pet.coins}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+{/* 頂部欄狀態 */}
+<div className="relative bg-white/80 p-4 shadow-sm flex justify-center">
+  {/* 正常流里水平置中 */}
+  <h1 className="text-xl font-bold text-gray-800">
+    虛擬寵物
+  </h1>
+
+  {/* 金幣絕對定位到右上：*/}
+  <div
+  className="absolute top-8 flex items-center space-x-1"
   
-        {/* 中間內容，讓它佔滿剩下高度，避免溢出 */}
+  style={{ right: '5%' }}  // 或 style={{ right: '120px' }}
+  >
+    <Coins className="w-4 h-4 text-yellow-500" />
+    <span className="font-medium">{pet.coins}</span>
+  </div>
+</div>
+
+
+  
+        {/* 主要內容區 */}
         <div className="flex-1 overflow-y-auto p-4">
           {currentView === 'home' && <HomeView />}
           {currentView === 'shop' && <ShopView />}
           {currentView === 'stats' && <StatsView />}
         </div>
   
-        {/* ✅ 底部導航「放在 flex 結構的最下層」，不使用 fixed/absolute */}
+        {/*  底部導航 */}
         <div className="bg-white border-t shadow-lg">
           <div className="flex justify-around py-2">
             <button
