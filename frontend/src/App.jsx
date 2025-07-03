@@ -207,7 +207,13 @@ const VirtualPetGame = () => {
   );
 
   const HomeView = () => (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col flex-1 overflow-hidden relative">
+       <img
+          src={petGif}
+          alt="寵物"
+          className="w-[192px] h-[192px] object-contain absolute z-10 pointer-events-none"
+          style={{ right: '1rem', bottom: '6rem' }}  
+          />
       {/* 上半部：寵物顯示區域 + 狀態條 */}
       <div className="flex-1 overflow-x-hidden overflow-y-auto space-y-6 pb-2 max-h-[calc(100%-100px)]">
         {/* 寵物顯示區域 */}
@@ -215,11 +221,7 @@ const VirtualPetGame = () => {
           <div className="text-8xl mb-4 animate-bounce">
             {getPetEmoji()}
           </div>
-          <img
-          src={petGif}
-          alt="寵物"
-          className="w-[192px] h-[192px] object-contain absolute bottom-2 right-2 z-10"
-          />
+         
           <h2 className="text-2xl font-bold text-gray-800 mb-2">{pet.name}</h2>
           <p className="text-gray-600">等級 {pet.level} • 經驗值 {pet.exp}/100</p>
           <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
@@ -368,19 +370,13 @@ const VirtualPetGame = () => {
     <div className="w-screen h-screen flex items-center justify-center bg-gray-200 overflow-hidden">
       {/* 📱 手機框 */}
       <div
-  className="
-  w-[390px] h-[844px]
-  rounded-[2rem]          /* 大圓角 */
-  overflow-hidden
-  shadow-xl shadow-black/20  /* 柔和陰影 */
-  ring-4 ring-indigo-300/60  /* 4px 淡靛色光暈邊框，60% 透明 */
-  bg-white/10 backdrop-blur-md
-  flex flex-col
-"
-
+  className="w-[484px] h-[726px] rounded-[2rem] overflow-hidden shadow-xl
+             ring-4 ring-indigo-300/60 bg-white/10 backdrop-blur-md flex flex-col"
   style={{
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover',
+    // 只在首頁顯示背景，其餘 view 傳 'none'
+    backgroundImage: currentView === 'home' ? `url(${background})` : 'none',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
   }}
 >
