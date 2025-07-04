@@ -7,7 +7,7 @@ import eat from './assets/eat.gif';
 const VirtualPetGame = () => {
   // 遊戲狀態
   const [pet, setPet] = useState({
-    name: "小貓咪",
+    name: "臭屁星人",
     type: "cat",
     level: 1,
     exp: 0,
@@ -218,12 +218,14 @@ const VirtualPetGame = () => {
       <div className="flex-1 overflow-x-hidden overflow-y-auto space-y-6 pb-2 max-h-[calc(100%-100px)]">
         {/* 寵物顯示區域 */}
         <div className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-6 text-center shadow-lg relative">
-          <div className="text-8xl mb-4 animate-bounce">
+          <div className="text-8xl mb-4 animate-bounce" size={40}>
             {getPetEmoji()}
           </div>
          
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">{pet.name}</h2>
-          <p className="text-gray-600">等級 {pet.level} • 經驗值 {pet.exp}/100</p>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">{pet.name}</h2>
+          <p className="text-[2rem] font-bold "
+          style={{ fontSize: '2rem', fontWeight: '700', color: '#ec4899' }}
+          >Lv: {pet.level} • EXP: {pet.exp}/100</p>
           <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
             <div 
               className="bg-purple-500 h-2 rounded-full transition-all duration-300"
@@ -280,7 +282,7 @@ const VirtualPetGame = () => {
       <h2 className="text-2xl font-bold text-gray-800 mb-4">商店</h2>
       <div className="bg-yellow-100 rounded-lg p-4 mb-4">
         <div className="flex items-center">
-          <Coins className="w-5 h-5 text-yellow-600 mr-2" />
+          <Coins className="w-8 h-5 text-yellow-600 mr-2" />
           <span className="font-bold text-yellow-800">金幣: {pet.coins}</span>
         </div>
       </div>
@@ -394,15 +396,13 @@ const VirtualPetGame = () => {
   <h1 className="text-xl font-bold text-gray-800">
     虛擬寵物
   </h1>
-
-  {/* 金幣絕對定位到右上：*/}
   <div
   className="absolute top-8 flex items-center space-x-1"
-  
-  style={{ right: '5%' }}  // 或 style={{ right: '120px' }}
-  >
-    <Coins className="w-4 h-4 text-yellow-500" />
-    <span className="font-medium">{pet.coins}</span>
+  style={{ right: '5%' }}  >
+    <Coins style={{color: '#eab308' }}size={32} className="text-yellow-600 mr-2" />
+    <span style={{ fontSize: '1.5rem', fontWeight: 700, color: '#eab308' }}>
+  金幣: {pet.coins}
+</span>
   </div>
 </div>
 
